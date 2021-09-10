@@ -24,11 +24,11 @@ class Signup extends Component {
           this.state.password === "" ||
           this.state.retypePassword === ""
         ) {
-          alert("Không được để trống");
+          alert("Not emty");
           return;
         }
         if (this.state.password !== this.state.retypePassword) {
-          alert("Mật khẩu nhập không trùng nhau");
+          alert("Password and retype password is wrong");
           return;
         }
     
@@ -38,7 +38,7 @@ class Signup extends Component {
         );
 
         if (user !== undefined) {
-          alert("Tài khoản đã có người sử dụng");
+          alert("Account is used");
           this.setState({
             userNameSignup: "",
             emailSignup: "",

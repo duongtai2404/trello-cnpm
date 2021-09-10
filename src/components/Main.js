@@ -41,20 +41,20 @@ class Main extends Component {
   }
   addMember(){
       if(this.state.member === ''){
-        alert("Nhập tên người bạn muốn mời");
+        alert("Enter the name of member");
         return;
       }
       const {user} = this.props;
       const userWantToInvite = user.lists.find(user => user === this.state.member);
       if(userWantToInvite === undefined){
-        alert("Người này không tồn tại");
+        alert("Account is not exist");
       }else{
         const { dispatch } = this.props;
         dispatch({
             type: "ADD_MEMBER",
             payload: { userName: this.state.member, boardId: this.state.currentBoard }
         });
-        alert("Đã thêm tài khoản này");
+        alert("Added this accout");
         this.setState({
             member: ""
         });
@@ -62,20 +62,20 @@ class Main extends Component {
   }
   deleteMember(){
     if(this.state.member === ''){
-        alert("Nhập tên người bạn muốn xóa");
+        alert("Enter the name of member");
         return;
     }
     const {user} = this.props;
     const userWantToInvite = user.lists.find(user => user === this.state.member);
     if(userWantToInvite === undefined){
-        alert("Người này không tồn tại");
+        alert("Person is not exist");
     }else{
         const {usersById, dispatch} = this.props;
         const isExitBoard = usersById[this.state.member].listBoard.find(board => board === this.state.currentBoard);
         if(isExitBoard === undefined){
-            alert("Người này không trong bảng của bạn");
+            alert("This person is not in board");
         }else{
-            if (window.confirm("Are you sure to delete this perpson out board?")) {
+            if (window.confirm("Are you sure to delete this person out board?")) {
                 dispatch({
                   type: "DELETE_MEMBER",
                   payload: {boardId: this.state.currentBoard, userName: this.state.member}

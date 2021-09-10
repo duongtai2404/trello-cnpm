@@ -19,14 +19,14 @@ class Signin extends Component {
 
   onSubmit(){
       if(this.state.email === '' || this.state.password === ''){
-        alert('Không được để  trống');
+        alert('Not emty');
         return;
       }
       if(this.state.email !== '' || this.state.password !== ''){
           const {usersById} = this.props;
           const user = usersById[this.state.email];
           if(user === undefined){
-            alert('Sai tên tài khoản');
+            alert('Wrong user name');
             this.setState({
                 email: ''
             });
@@ -35,7 +35,7 @@ class Signin extends Component {
                 this.props.changeCurrentName(this.state.email);
                   this.props.changePage('home');
               }else{
-                alert('Sai mật khẩu');
+                alert('Wrong password');
                 this.setState({
                     password: ''
                 });
@@ -106,7 +106,7 @@ class Signin extends Component {
                 {" "}
                 Sign Up ?
               </a>
-              Forgot <a href="#">password?</a>
+              {/* Forgot <a href="#">password?</a> */}
             </p>
           </form>
         </div>

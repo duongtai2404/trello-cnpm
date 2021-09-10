@@ -40,7 +40,7 @@ class Home extends Component {
 
     deleteBoard(boardId){
         const {dispatch} = this.props;
-        if (window.confirm("Bạn muốn xóa bảng này?")) {
+        if (window.confirm("Do you want to delete this board?")) {
             dispatch({
               type: "DELETE_MEMBER",
               payload: {boardId: boardId, userName: this.props.currentUserName}
@@ -99,7 +99,7 @@ class Home extends Component {
                     marginRight: "5px",
                 }}
                 className="form-control"
-                placeholder="Title card ..."
+                placeholder="Title board ..."
                 value={this.state.content}
                 onChange={(event) => {
                     this.setState({
