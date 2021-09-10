@@ -2,29 +2,113 @@ import { combineReducers, createStore } from "redux";
 import throttle from "lodash.throttle";
 import seed from "./seed";
 
-const board = (state = { lists: [] }, action) => {
-  switch (action.type) {
-    case "ADD_LIST": {
-      const { listId } = action.payload;
-      return { lists: [...state.lists, listId] };
-    }
-    case "MOVE_LIST": {
-      const { oldListIndex, newListIndex } = action.payload;
-      const newLists = Array.from(state.lists);
-      const [removedList] = newLists.splice(oldListIndex, 1);
-      newLists.splice(newListIndex, 0, removedList);
-      return { lists: newLists };
-    }
-    case "DELETE_LIST": {
-      const { listId } = action.payload;
-      const filterDeleted = tmpListId => tmpListId !== listId;
-      const newLists = state.lists.filter(filterDeleted);
-      return { lists: newLists };
+const user = (state = { lists: []}, action) => {
+  switch(action.type){
+    case "ADD_USER" : {
+      const {userName} = action.payload;
+      return { lists: [...state.lists, userName] };
     }
     default:
       return state;
   }
-};
+}
+
+const usersById = (state = {}, action) => {
+  switch(action.type){
+    case "ADD_USER" : {
+      const {userName, password} = action.payload;
+      return { ...state, 
+        [userName]: { userName: userName, password: password, listBoard : []}
+      }
+    }
+    case "ADD_BOARD": {
+      const {userName, boardId} = action.payload;
+      return { ...state, 
+        [userName]: { ...state[userName], listBoard: [...state[userName].listBoard, boardId]}
+      }
+    }
+    case "ADD_MEMBER": {
+      const {userName, boardId} = action.payload;
+      return { ...state, 
+        [userName]: { ...state[userName], listBoard: [...state[userName].listBoard, boardId]}
+      }
+    }
+    case "DELETE_MEMBER": {
+      const {userName, boardId} = action.payload;
+      const filterDeleted = tmpBoardId => tmpBoardId !== boardId;
+      const newLists = state[userName].listBoard.filter(filterDeleted);
+      return {
+        ...state,
+        [userName]: {...state[userName], listBoard: newLists}
+      }
+    }
+    default:
+      return state;
+  }
+}
+
+// const board = (state = { lists: [] }, action) => {
+//   switch (action.type) {
+//     case "ADD_BOARD": {
+//       const {boardId, boardTitle} = action.payload;
+//       return { ...state, 
+//         [boardId]: {boardId: boardId, boardTitle: boardTitle, lists: []}
+//       }
+//     }
+//     case "ADD_LIST": {
+//       const { listId } = action.payload;
+//       return { lists: [...state.lists, listId] };
+//     }
+//     case "MOVE_LIST": {
+//       const { oldListIndex, newListIndex } = action.payload;
+//       const newLists = Array.from(state.lists);
+//       const [removedList] = newLists.splice(oldListIndex, 1);
+//       newLists.splice(newListIndex, 0, removedList);
+//       return { lists: newLists };
+//     }
+//     case "DELETE_LIST": {
+//       const { listId } = action.payload;
+//       const filterDeleted = tmpListId => tmpListId !== listId;
+//       const newLists = state.lists.filter(filterDeleted);
+//       return { lists: newLists };
+//     }
+//     default:
+//       return state;
+//   }
+// };
+
+const boardsById = (state = {}, action ) => {
+  switch (action.type) {
+    case "ADD_BOARD": {
+      const {boardId, boardTitle} = action.payload;
+      return { ...state, 
+        [boardId]: {boardId: boardId, boardTitle: boardTitle, lists: []}
+      }
+    }
+    case "ADD_LIST": {
+      const {boardId, listId} = action.payload;
+      return {
+        ...state,
+        [boardId]: {...state[boardId], lists: [...state[boardId].lists, listId]}
+      }
+    }
+    case "MOVE_LIST": {
+      const { boardId, oldListIndex, newListIndex } = action.payload;
+      const newLists = Array.from(state[boardId].lists);
+      const [removedList] = newLists.splice(oldListIndex, 1);
+      newLists.splice(newListIndex, 0, removedList);
+      return { ...state, [boardId]: { ...state[boardId], lists: newLists }};
+    }
+    case "DELETE_LIST": {
+      const { boardId, listId } = action.payload;
+      const filterDeleted = tmpListId => tmpListId !== listId;
+      const newLists = state[boardId].lists.filter(filterDeleted);
+      return { ...state, [boardId]: { ...state[boardId], lists: newLists }};
+    }
+    default:
+      return state;
+  }
+}
 
 const listsById = (state = {}, action) => {
   switch (action.type) {
@@ -129,7 +213,9 @@ const cardsById = (state = {}, action) => {
 };
 
 const reducers = combineReducers({
-  board,
+  user,
+  usersById,
+  boardsById,
   listsById,
   cardsById
 });
@@ -165,7 +251,7 @@ store.subscribe(
 );
 
 console.log(store.getState());
-if (!store.getState().board.lists.length) {
+if (store.getState().user.lists.length === 0) {
   console.log("SEED");
   seed(store);
 }

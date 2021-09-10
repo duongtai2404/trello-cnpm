@@ -16,12 +16,12 @@ class AddList extends Component {
   createList = async () => {
     const { title } = this.state;
     const { dispatch } = this.props;
-
+    const {currentBoard} = this.props;
     this.props.toggleAddingList();
 
     dispatch({
       type: "ADD_LIST",
-      payload: { listId: shortid.generate(), listTitle: title }
+      payload: { boardId:currentBoard, listId: shortid.generate(), listTitle: title }
     });
   };
 

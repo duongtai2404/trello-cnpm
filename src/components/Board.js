@@ -28,6 +28,7 @@ class Board extends Component {
         dispatch({
           type: "MOVE_LIST",
           payload: {
+            boardId: this.props.currentBoard,
             oldListIndex: source.index,
             newListIndex: destination.index
           }
@@ -54,7 +55,7 @@ class Board extends Component {
   };
 
   render() {
-    const { board } = this.props;
+    const { board, currentBoard } = this.props;
     const { addingList } = this.state;
 
     return (
@@ -62,15 +63,15 @@ class Board extends Component {
         <Droppable droppableId="board" direction="horizontal" type="COLUMN">
           {(provided, _snapshot) => (
             <div className="Board" ref={provided.innerRef}>
-              {board.lists.map((listId, index) => {
-                return <List listId={listId} key={listId} index={index} />;
+              {board[currentBoard].lists.map((listId, index) => {
+                return <List currentBoard={currentBoard} listId={listId} key={listId} index={index} />;
               })}
 
               {provided.placeholder}
 
               <div className="Add-List">
                 {addingList ? (
-                  <AddList toggleAddingList={this.toggleAddingList} />
+                  <AddList currentBoard={currentBoard} toggleAddingList={this.toggleAddingList} />
                 ) : (
                   <div
                     onClick={this.toggleAddingList}
@@ -88,6 +89,7 @@ class Board extends Component {
   }
 }
 
-const mapStateToProps = state => ({ board: state.board });
+
+const mapStateToProps = state => ({ board: state.boardsById });
 
 export default connect(mapStateToProps)(Board);
