@@ -159,32 +159,102 @@ class Home extends Component {
                       <h4 className='card-title'>
                         {boardsById[card].boardTitle}
                       </h4>
-                      <div
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-around',
-                        }}
-                      >
-                        <button
-                          style={{ padding: '2px 8px' }}
-                          onClick={() => {
-                            this.props.changeCurrentBoard(card);
-                            this.props.changePage('board');
+                      {usersById[currentUserName].newBoard !== undefined &&
+                      usersById[currentUserName].newBoard === card ? (
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-around',
+                            backgroundColor: 'greenyellow',
                           }}
-                          className='btn btn-outline-primary'
                         >
-                          Go To
-                        </button>
-                        <button
-                          style={{ padding: '2px 8px' }}
-                          onClick={() => {
-                            this.deleteBoard(card);
+                          <button
+                            style={{ padding: '2px 8px' }}
+                            onClick={() => {
+                              //   const listMember = [];
+                              //   for (const property in this.props.usersById) {
+                              //     if (property !== currentUserName) {
+                              //       const isExit = this.props.usersById[
+                              //         property
+                              //       ].listBoard.find((board) => board === card);
+                              //       console.log(isExit);
+                              //       if (isExit !== undefined) {
+                              //         listMember.push(property);
+                              //       }
+                              //     }
+                              //   }
+                              const { dispatch } = this.props;
+                              if (
+                                window.confirm(
+                                  'Are you sure to accept this board?'
+                                )
+                              ) {
+                                dispatch({
+                                  type: 'ACCEPT_NEWBOARD',
+                                  payload: {
+                                    userName: currentUserName,
+                                    boardId: card,
+                                  },
+                                });
+                              }
+                              //   this.props.changeListMember(listMember);
+                              //   this.props.changeCurrentBoard(card);
+                              //   this.props.changePage('board');
+                            }}
+                            className='btn btn-outline-primary'
+                          >
+                            Add
+                          </button>
+                          <button
+                            style={{ padding: '2px 8px' }}
+                            onClick={() => {
+                              this.deleteBoard(card);
+                            }}
+                            className='btn btn-outline-danger'
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ) : (
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-around',
                           }}
-                          className='btn btn-outline-danger'
                         >
-                          Delete
-                        </button>
-                      </div>
+                          <button
+                            style={{ padding: '2px 8px' }}
+                            onClick={() => {
+                              const listMember = [];
+                              for (const property in this.props.usersById) {
+                                if (property !== currentUserName) {
+                                  const isExit = this.props.usersById[
+                                    property
+                                  ].listBoard.find((board) => board === card);
+                                  if (isExit !== undefined) {
+                                    listMember.push(property);
+                                  }
+                                }
+                              }
+                              this.props.changeCurrentBoard(card);
+                              this.props.changeListMember(listMember);
+                              this.props.changePage('board');
+                            }}
+                            className='btn btn-outline-primary'
+                          >
+                            Go To
+                          </button>
+                          <button
+                            style={{ padding: '2px 8px' }}
+                            onClick={() => {
+                              this.deleteBoard(card);
+                            }}
+                            className='btn btn-outline-danger'
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

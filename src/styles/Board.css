@@ -31,3 +31,6 @@
 .Add-List-Button ion-icon {
   margin-right: 1px;
 }
+.listMember:hover {
+  background-color: #e9ecef;
+}

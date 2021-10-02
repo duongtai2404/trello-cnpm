@@ -43,3 +43,238 @@
   opacity: 1;
   background: rgba(220, 220, 220, 1);
 }
+.list-label-card {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 6px;
+}
+.label-card {
+  min-width: 50px;
+  height: 8px;
+  background-color: rgb(79, 190, 35);
+  margin-right: 5px;
+  border-radius: 5px;
+}
+.list-member-card {
+  display: flex;
+  justify-content: flex-end;
+}
+.member-card {
+  margin-left: 7px;
+  background: deepskyblue;
+  color: white;
+  padding: 2px 8px 0px 8px;
+  font-size: 12px;
+  text-align: center;
+}
+.container-information-expire {
+  border-radius: 5px;
+  min-height: 30px;
+  margin-bottom: 10px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.information-expire {
+  margin: 0px;
+  color: white;
+  font-weight: 600;
+}
+.container-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-modal {
+  overflow-y: scroll;
+}
+.main-modal::-webkit-scrollbar {
+  display: none;
+}
+.header-modal {
+  display: flex;
+  margin-bottom: 20px;
+}
+.name-card {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.close-modal {
+  margin-left: auto;
+}
+
+.container-member-card {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+.member-card-modal {
+  display: flex;
+  flex-direction: column;
+  margin-right: 150px;
+}
+.title-member-card {
+  margin-bottom: 7px;
+  color: #a5a1a1;
+}
+.list-member-card {
+  display: flex;
+  flex-direction: row;
+  margin-left: -7px;
+}
+.member-card-add:hover {
+  background: rgb(213, 220, 226);
+  font-weight: 600;
+}
+.expire-day {
+  display: flex;
+  flex-direction: column;
+  /* margin-bottom: 0; */
+}
+.title-expire-day {
+  color: #a5a1a1;
+  margin-bottom: 7px;
+}
+.information-member-to-add {
+  position: fixed;
+  background-color: #f1ebeb;
+  margin-top: 10px;
+  margin-left: 7px;
+  min-width: 300px;
+  border-radius: 5px;
+  padding: 10px;
+}
+.header-information-member-to-add {
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+.contain-list-member-need-add {
+  padding-top: 5px;
+}
+.member-need-to-add {
+  text-align: center;
+  font-weight: 600;
+  padding: 5px;
+  border-radius: 5px;
+}
+.member-need-to-add:hover {
+  background-color: white;
+}
+.main-container {
+  border-right: 1px solid black;
+  padding-right: 10px;
+}
+.item-list-tasks {
+  margin-bottom: 10px;
+}
+.btn-add-task {
+  font-size: 15px;
+  background-color: #ebecf0;
+}
+.btn-add-task:hover {
+  cursor: pointer;
+  background-color: #e3e4e9;
+}
+.form-add-task {
+  font-size: 15px;
+  max-width: 400px;
+  margin-bottom: 12px;
+}
+.textarea-add-task {
+  font-size: 14px;
+}
+.textarea-add-task:active {
+  border: 1px solid deepskyblue;
+}
+.additional-container {
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding-right: 5px;
+  padding-left: 10px;
+  font-size: 14px;
+}
+.dangerDeadline,
+.warningDeadline {
+  padding: 7px 10px;
+  background-color: #ebecf0;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+.dangerDeadline:hover,
+.warningDeadline:hover {
+  cursor: pointer;
+  background-color: #e3e4e9;
+}
+.container-day-to-choose {
+  position: fixed;
+  min-width: 70px;
+  max-height: 100px;
+  overflow-y: scroll;
+  margin-left: 105px;
+  margin-top: 30px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+.container-day-to-choose::-webkit-scrollbar {
+  display: none;
+}
+.item-day-to-choose:hover {
+  cursor: pointer;
+  background-color: #ebecf0;
+}
+.container-tasks {
+  margin-top: 20px;
+}
+.title-container-tasks {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.comment-card {
+  margin-top: 20px;
+  max-width: 600px;
+}
+.title-comment-card {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.container-list-comment {
+  margin-bottom: 5px;
+  flex-direction: column;
+}
+.item-comment {
+  padding: 5px 0;
+  margin-bottom: 10px;
+}
+.name-user-comment {
+  font-weight: 600;
+}
+.item-comment-content {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  padding: 0 15px;
+}
+.tag-suggestion {
+  position: fixed;
+  min-width: 100px;
+  border: 1px solid #ebecf0;
+  margin-top: -23px;
+  margin-left: 80px;
+  background-color: #ebecf0;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 5px;
+}
+.member-tag-suggestion {
+  padding: 3px;
+}
+.member-tag-suggestion:hover {
+  color: deepskyblue;
+  font-weight: 600;
+  background-color: #e3e4e9;
+  cursor: pointer;
+}

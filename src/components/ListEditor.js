@@ -1,19 +1,17 @@
-import "../styles/ListEditor.css";
+import '../styles/ListEditor.css';
 
-import React, { Component } from "react";
-import TextareaAutosize from "react-textarea-autosize";
+import React, { Component } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 
 class ListEditor extends Component {
   ref = React.createRef();
 
-  onEnter = e => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      this.props.saveList();
-    }
+  onEnter = (e) => {
+    e.preventDefault();
+    this.props.saveList();
   };
 
-  handleClick = e => {
+  handleClick = (e) => {
     const node = this.ref.current;
 
     if (node.contains(e.target)) {
@@ -24,28 +22,46 @@ class ListEditor extends Component {
   };
 
   componentDidMount() {
-    document.addEventListener("click", this.handleClick, false);
+    document.addEventListener('click', this.handleClick, false);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleClick, false);
+    document.removeEventListener('click', this.handleClick, false);
   }
 
   render() {
-    const { title, handleChangeTitle, deleteList } = this.props;
+    const {
+      title,
+      handleChangeTitle,
+      deleteList,
+      minPercentTask,
+      handleChangeMinPercentTask,
+    } = this.props;
 
     return (
-      <div className="List-Title-Edit" ref={this.ref}>
+      <div className='List-Title-Edit' ref={this.ref}>
         <TextareaAutosize
           autoFocus
-          className="List-Title-Textarea"
-          placeholder="Enter list title..."
+          className='List-Title-Textarea'
+          placeholder='Title ...'
           value={title}
           onChange={handleChangeTitle}
-          onKeyDown={this.onEnter}
-          style={{ width: deleteList ? 220 : 245 }}
+          style={{ width: deleteList ? 90 : 125 }}
         />
-        {deleteList && <ion-icon name="trash" onClick={deleteList} />}
+        <TextareaAutosize
+          type='number'
+          className='List-Title-Textarea'
+          placeholder='Percent...'
+          value={minPercentTask}
+          onChange={handleChangeMinPercentTask}
+          style={{ width: deleteList ? 90 : 125 }}
+        />
+        {deleteList && (
+          <div>
+            <ion-icon name='trash' onClick={deleteList} />
+            <ion-icon name='save' onClick={this.onEnter} />
+          </div>
+        )}
       </div>
     );
   }
